@@ -17,8 +17,8 @@
 - Additional libraries as listed in the Mask R-CNN [GitHub repository](https://github.com/matterport/Mask_RCNN).
 
    
-##Running the Application
-###Training
+## Running the Application
+### Training
 To initiate training with X-Balloon's custom configurations:
 
  ```bash
@@ -29,7 +29,7 @@ This will:
 Fetch datasets from the backend.
 Apply configurations and data augmentations.
 Train the model with Mask R-CNN using your dataset.
-###Inference
+### Inference
 To perform inference on test datasets:
 
  ```bash
@@ -40,10 +40,10 @@ The AI application will:
 Load the trained model weights.
 Fetch test datasets from the backend.
 Generate and upload segmentation results for validation.
-###Workflow
+### Workflow
 Dataset Preparation: Manage and annotate datasets using the backend and annotation module.
 Model Training: Train Mask R-CNN on the prepared datasets with custom configurations.
 Inference and Evaluation: Use trained models to generate segmentation masks and analyze results.
-##License
+## License
 This project is distributed under the MIT license. Mask R-CNN follows its original license as provided by Matterport.
 
