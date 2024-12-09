@@ -16,12 +16,6 @@
 - Keras
 - Additional libraries as listed in the Mask R-CNN [GitHub repository](https://github.com/matterport/Mask_RCNN).
 
-### Steps
-1. Clone the Mask R-CNN repository:
-   ```bash
-   git clone https://github.com/matterport/Mask_RCNN.git
-   cd Mask_RCNN
-   ```
    
 ##Running the Application
 ###Training
