@@ -45,5 +45,13 @@ Dataset Preparation: Manage and annotate datasets using the backend and annotati
 Model Training: Train Mask R-CNN on the prepared datasets with custom configurations.
 Inference and Evaluation: Use trained models to generate segmentation masks and analyze results.
 ## License
-This project is distributed under the MIT license. Mask R-CNN follows its original license as provided by Matterport.
+Copyright (C) 2025 Odysseas Tsakai
+
+This project is licensed under the GNU General Public License v3 (GPLv3).
+See <https://www.gnu.org/licenses/>.
+
+This project includes code from the Mask R-CNN project developed by Matterport, Inc.,
+which is licensed under the MIT License.
+
+Third-party components retain their original licenses.
 
