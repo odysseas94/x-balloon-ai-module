@@ -16,7 +16,9 @@ from app.src.models.TestingModel import TestingModel
 
 GLOBAL_PATH = os.path.abspath(__file__ + "../../../../")
 print(GLOBAL_PATH, "GLOBAL PATH")
-DATASET_PATH = GLOBAL_PATH + "/datasets"
+#add directory separator
+
+DATASET_PATH = os.path.join(GLOBAL_PATH, "datasets")
 
 
 class LoadFromServer:

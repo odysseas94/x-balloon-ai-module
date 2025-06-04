@@ -8,7 +8,8 @@ from collections import namedtuple
 
 class UrlConnection:
     mainController = "ai/"
-    domainUrl = "http://localhost:8888/index.php?r=api/v1/"
+    # set the domain URL to your API endpoint
+    domainUrl = "https://callbuddy.eu/X-Balloon-Backend/web/index.php?r=api/v1/"
     username = "admin"
     password = "admin"
     url_appender = None

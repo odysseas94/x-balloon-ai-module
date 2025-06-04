@@ -2,7 +2,6 @@ import os
 import platform
 import re
 import uuid
-import nvgpu
 import psutil
 
 
@@ -20,7 +19,7 @@ class MachineHardware:
 
     def init(self):
         self.machineCore()
-        self.gpuInfo()
+        #self.gpuInfo()
         self.inited = True
         return self
 

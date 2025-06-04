@@ -10,19 +10,44 @@
 
 ## Installation and Setup
 
+
+
+
 ### Prerequisites
 - Python 3.x
 - TensorFlow (GPU preferred for training)
 - Keras
 - Additional libraries as listed in the Mask R-CNN [GitHub repository](https://github.com/matterport/Mask_RCNN).
 
+
+## installation
+To install all the libraries, follow these steps:
+```python
+python -m pip install -r requirements.txt
+
+```
+
+also you need to copy
+https://github.com/matterport/Mask_RCNN/releases/download/v1.0/mask_rcnn_coco.h5
+in the `app/datasets/mask_rcnn_coco.h5`
+
+### Conifguration
+
+set the `app\connection\UrlConnection.py` file with your backend URL:
+
+```python
+# URL for the backend server
+domainUrl = "https://{your_domain}/index.php?r=api/v1/"
+```
+
+
    
 ## Running the Application
 ### Training
-To initiate training with X-Balloon's custom configurations:
+To initiate training with X-Balloon's custom configurations: at the root directory of the project, run:
 
  ```bash
-python Application.py train
+python -m app.src.Application train
   ```
 This will:
 
@@ -30,11 +55,12 @@ Fetch datasets from the backend.
 Apply configurations and data augmentations.
 Train the model with Mask R-CNN using your dataset.
 ### Inference
-To perform inference on test datasets:
+To perform inference on test datasets: at the root directory of the project, run:
 
  ```bash
-python Application.py detect
-```
+python -m app.src.Application detect
+  ```
+
 The AI application will:
 
 Load the trained model weights.

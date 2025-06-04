@@ -2,7 +2,6 @@ import datetime
 import copy
 import tensorflow as tf
 
-from app.src.generic.Socket import Socket
 
 
 class MetricsCallback(tf.keras.callbacks.Callback):
@@ -17,7 +16,7 @@ class MetricsCallback(tf.keras.callbacks.Callback):
         if logs:
             self.metrics[self.counter] = copy.copy(logs)
         self.load_from_server.write_down_json_metrics(self.metrics)
-        Socket.printLog('Evaluating: epoch {} ends at {}'.format(epoch, datetime.datetime.now().time()), logs)
+
 
     def __init__(self, load_from_server):
         super().__init__()

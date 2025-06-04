@@ -2,11 +2,7 @@ import os
 
 # os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"  # see issue #152
 # os.environ["CUDA_VISIBLE_DEVICES"] = ""
-from app.src.export.ExportHandler import ExportHandler
-from app.src.instances.ShapeInstance import ShapeInstance
-from app.src.models.ImageModel import ImageModel
-
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+# os.environ["CUDA_VISIBLE_DEVICES"]="1"
 import traceback
 
 import imgaug
@@ -54,7 +50,6 @@ class Application:
     metricsCallback = None
     checkPointCallback = None
     socket = None
-    export_handler = None
 
     def __init__(self):
         self.action = "train"
@@ -71,7 +66,6 @@ class Application:
             if action == "train":
                 self.load_from_server = LoadFromServer()
                 self.config = AiConfig(self.load_from_server)
-                return;
             else:
                 self.action = "testing"
                 self.mode = "inference"
@@ -81,7 +75,7 @@ class Application:
 
             # set configuration
             if not (self.load_from_server.data_testing or self.load_from_server.data_dataset):
-                printLog("Set is empty")
+                printLog("Set is empty" )
                 self.endedAction()
                 return 0
 
@@ -149,9 +143,6 @@ class Application:
         self.endedAction()
 
     def detect_and_color_splash(self):
-
-        self.export_handler = ExportHandler(self.load_from_server)
-
         printLog("Config", self.config.get_info())
         printLog("Starting Testing")
         printLog("Downloading all images from server")
@@ -197,10 +188,8 @@ class Application:
                             polygons.append(polygon.segmentation[index_polygons])
                             classifications_ids.append(str(class_ids[c]))
                             score_lists.append(str(scores[c]))
-
                 # print(score_lists)
-                # To export annotatioons
-                self.export_shapes(image_model, polygons, classifications_ids)
+
                 collector.push_polygon(image_model, polygons, classifications_ids, score_lists)
                 length = len(image_model.canonical_name)
                 new_name = image_model.canonical_name[0:length - 4] + "-classified" + image_model.canonical_name[
@@ -208,24 +197,10 @@ class Application:
                 printLog("Saving Image to localhost and uploading data and masks to server")
                 # save image
                 skimage.io.imsave(testing_set.current_path + new_name, splash)
-                self.export_handler.save_excel_export()
-                #collector.upload()
+                collector.upload()
         printLog("Testing Ended")
-        #CompleteTestingConnection(self.load_from_server.testingModel.id)
+        CompleteTestingConnection(self.load_from_server.testingModel.id)
         self.endedAction()
-
-
-    def export_shapes(self, image: ImageModel, polygons: [], class_ids):
-
-        index = 0
-        for polygon in polygons:
-            shape_instance = ShapeInstance("multipolygon")
-
-            shape_instance.canonical_points_to_all_points(polygon)
-            shape_instance.class_id = int(class_ids[index])
-            image.shapes.append(shape_instance)
-            index += 1
-        self.export_handler.init_instances_testing_image(image)
 
     def load_model(self):
         self.model = modellib.MaskRCNN(mode=self.mode, config=self.config,
